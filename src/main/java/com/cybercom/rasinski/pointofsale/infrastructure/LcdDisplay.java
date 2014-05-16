@@ -1,6 +1,7 @@
-package com.cybercom.rasinski.pointofsale.output;
+package com.cybercom.rasinski.pointofsale.infrastructure;
 
 import com.cybercom.rasinski.pointofsale.domain.Product;
+import com.cybercom.rasinski.pointofsale.application.OutputPOS;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;

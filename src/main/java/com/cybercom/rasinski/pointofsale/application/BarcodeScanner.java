@@ -1,5 +1,6 @@
-package com.cybercom.rasinski.pointofsale.input;
+package com.cybercom.rasinski.pointofsale.application;
 
+import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.ProductRepository;
 
@@ -11,14 +12,12 @@ public class BarcodeScanner {
     }
 
     public Product scan(Barcode barcode) {
-        String barcodeValue = barcode.getValue();
+        String code = barcode.getCode();
 
-        if (barcodeValue.isEmpty()) {
-            throw new InvalidBarcodeException("Invalid barcode: " + barcodeValue);
+        if (code.isEmpty()) {
+            throw new InvalidBarcodeException("Invalid barcode: " + code);
         }
 
-        Long productId = new Long(barcodeValue);
-
-        return productRepository.find(productId);
+        return productRepository.findByBarcode(barcode);
     }
 }

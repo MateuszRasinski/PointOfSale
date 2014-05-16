@@ -1,4 +1,4 @@
-package com.cybercom.rasinski.pointofsale.output;
+package com.cybercom.rasinski.pointofsale.application;
 
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import java.math.BigDecimal;

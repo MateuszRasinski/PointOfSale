@@ -1,6 +1,8 @@
 package com.cybercom.rasinski.pointofsale.output;
 
 import com.cybercom.rasinski.pointofsale.domain.Product;
+import com.cybercom.rasinski.pointofsale.domain.Barcode;
+import com.cybercom.rasinski.pointofsale.infrastructure.LcdDisplay;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.math.BigDecimal;
@@ -33,7 +35,7 @@ public class LcdDisplayTest {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay(new Locale("pl", "PL"));
         BigDecimal price = new BigDecimal("0.33").setScale(2, RoundingMode.HALF_UP);
-        Product product = new Product(1L, "Bread", price);
+        Product product = new Product(1L, "Bread", new Barcode("123"), price);
         //when
         lcdDisplay.print(product);
         //then
@@ -46,7 +48,7 @@ public class LcdDisplayTest {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay(Locale.US);
         BigDecimal price = new BigDecimal("0.33").setScale(2, RoundingMode.HALF_UP);
-        Product product = new Product(1L, "Bread", price);
+        Product product = new Product(1L, "Bread", new Barcode("123"), price);
         //when
         lcdDisplay.print(product);
         //then

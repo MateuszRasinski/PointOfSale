@@ -18,15 +18,15 @@ public class ProductRepositoryTest {
     @BeforeClass
     public void setUp() {
         Map<Long, Product> productTable = new HashMap<>();
-        sampleProduct = new Product(1L, "Sample name", new BigDecimal("3.5"));
+        sampleProduct = new Product(1L, "Sample name", new Barcode("xx"), new BigDecimal("3.5"));
         productTable.put(1L, sampleProduct);
         productRepository = new ProductRepositoryImpl(productTable);
     }
 
     @Test
-    public void shouldFind() {
+    public void shouldFindByBarcode() {
         //when
-        Product product = productRepository.find(1L);
+        Product product = productRepository.findByBarcode(new Barcode("xx"));
         //then
         assertThat(product).isEqualTo(sampleProduct);
     }
@@ -35,6 +35,6 @@ public class ProductRepositoryTest {
     @Test(expectedExceptions = ProductNotFoundException.class)
     public void shouldThrowProductNotFoundException() {
         //when
-        productRepository.find(2L);
+        productRepository.findByBarcode(new Barcode("yy"));
     }
 }
