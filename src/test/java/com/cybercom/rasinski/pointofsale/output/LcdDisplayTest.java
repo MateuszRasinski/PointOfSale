@@ -1,7 +1,8 @@
 package com.cybercom.rasinski.pointofsale.output;
 
-import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
+import com.cybercom.rasinski.pointofsale.domain.Money;
+import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.infrastructure.LcdDisplay;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -15,6 +16,7 @@ import org.testng.annotations.Test;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class LcdDisplayTest {
+    private static final Locale LOCALE_PL = new Locale("pl", "PL");
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutStream;
 
@@ -33,9 +35,9 @@ public class LcdDisplayTest {
     @Test
     public void shouldPrintProductInPLN() {
         //given
-        LcdDisplay lcdDisplay = new LcdDisplay(new Locale("pl", "PL"));
+        LcdDisplay lcdDisplay = new LcdDisplay();
         BigDecimal price = new BigDecimal("0.33").setScale(2, RoundingMode.HALF_UP);
-        Product product = new Product(1L, "Bread", new Barcode("123"), price);
+        Product product = new Product(1L, "Bread", new Barcode("123"), new Money(price, LOCALE_PL));
         //when
         lcdDisplay.print(product);
         //then
@@ -46,9 +48,9 @@ public class LcdDisplayTest {
     @Test
     public void shouldPrintProductInUSD() {
         //given
-        LcdDisplay lcdDisplay = new LcdDisplay(Locale.US);
+        LcdDisplay lcdDisplay = new LcdDisplay();
         BigDecimal price = new BigDecimal("0.33").setScale(2, RoundingMode.HALF_UP);
-        Product product = new Product(1L, "Bread", new Barcode("123"), price);
+        Product product = new Product(1L, "Bread", new Barcode("123"), new Money(price, Locale.US));
         //when
         lcdDisplay.print(product);
         //then
@@ -59,8 +61,8 @@ public class LcdDisplayTest {
     @Test
     public void shouldPrintTotalSumInPLN() {
         //given
-        LcdDisplay lcdDisplay = new LcdDisplay(new Locale("pl", "PL"));
-        BigDecimal totalSum = new BigDecimal("54.135").setScale(2, RoundingMode.HALF_UP);
+        LcdDisplay lcdDisplay = new LcdDisplay();
+        Money totalSum = new Money(new BigDecimal("54.135"), LOCALE_PL);
         //when
         lcdDisplay.print(totalSum);
         //then
@@ -71,8 +73,8 @@ public class LcdDisplayTest {
     @Test
     public void shouldPrintTotalSumInUSD() {
         //given
-        LcdDisplay lcdDisplay = new LcdDisplay(Locale.US);
-        BigDecimal totalSum = new BigDecimal("54.135").setScale(2, RoundingMode.HALF_UP);
+        LcdDisplay lcdDisplay = new LcdDisplay();
+        Money totalSum = new Money(new BigDecimal("54.135"), Locale.US);
         //when
         lcdDisplay.print(totalSum);
         //then
@@ -83,7 +85,7 @@ public class LcdDisplayTest {
     @Test
     public void shouldPrintProductNotFound() {
         //given
-        LcdDisplay lcdDisplay = new LcdDisplay(new Locale("any locale"));
+        LcdDisplay lcdDisplay = new LcdDisplay();
         //when
         lcdDisplay.printProductNotFound();
         //then
@@ -94,7 +96,7 @@ public class LcdDisplayTest {
     @Test
     public void shouldPrintInvalidBarcode() {
         //given
-        LcdDisplay lcdDisplay = new LcdDisplay(new Locale("any locale"));
+        LcdDisplay lcdDisplay = new LcdDisplay();
         //when
         lcdDisplay.printInvalidBarcode();
         //then

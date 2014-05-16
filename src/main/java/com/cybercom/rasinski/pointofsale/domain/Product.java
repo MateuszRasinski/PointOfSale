@@ -6,9 +6,9 @@ public class Product {
     private Long id;
     private String name;
     private Barcode barcode;
-    private BigDecimal price;
+    private Money price;
 
-    public Product(Long id, String name, Barcode barcode, BigDecimal price) {
+    public Product(Long id, String name, Barcode barcode, Money price) {
         this.id = id;
         this.name = name;
         this.barcode = barcode;
@@ -27,7 +27,7 @@ public class Product {
         return barcode;
     }
 
-    public BigDecimal getPrice() {
+    public Money getPrice() {
         return price;
     }
 }

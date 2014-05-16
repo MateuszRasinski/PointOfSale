@@ -18,7 +18,8 @@ public class ProductRepositoryTest {
     @BeforeClass
     public void setUp() {
         Map<Long, Product> productTable = new HashMap<>();
-        sampleProduct = new Product(1L, "Sample name", new Barcode("xx"), new BigDecimal("3.5"));
+        sampleProduct = new Product(1L, "Sample name", new Barcode("xx"),
+                new Money(new BigDecimal("3.5")));
         productTable.put(1L, sampleProduct);
         productRepository = new ProductRepositoryImpl(productTable);
     }
