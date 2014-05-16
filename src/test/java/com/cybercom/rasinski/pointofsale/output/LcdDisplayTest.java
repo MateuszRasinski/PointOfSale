@@ -3,6 +3,7 @@ package com.cybercom.rasinski.pointofsale.output;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
+import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 import com.cybercom.rasinski.pointofsale.infrastructure.LcdDisplay;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -14,6 +15,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class LcdDisplayTest {
     private static final Locale LOCALE_PL = new Locale("pl", "PL");
@@ -63,8 +66,10 @@ public class LcdDisplayTest {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay();
         Money totalSum = new Money(new BigDecimal("54.135"), LOCALE_PL);
+        ShoppingCart shoppingCart = mock(ShoppingCart.class);
+        when(shoppingCart.getTotalSum()).thenReturn(totalSum);
         //when
-        lcdDisplay.print(totalSum);
+        lcdDisplay.print(shoppingCart);
         //then
         String expected = "TOTAL:\t\t54,14 zł";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
@@ -75,8 +80,10 @@ public class LcdDisplayTest {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay();
         Money totalSum = new Money(new BigDecimal("54.135"), Locale.US);
+        ShoppingCart shoppingCart = mock(ShoppingCart.class);
+        when(shoppingCart.getTotalSum()).thenReturn(totalSum);
         //when
-        lcdDisplay.print(totalSum);
+        lcdDisplay.print(shoppingCart);
         //then
         String expected = "TOTAL:\t\t$54.14";
         assertThat(systemOutStream.toString()).isEqualTo(expected);

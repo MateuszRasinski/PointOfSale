@@ -3,6 +3,7 @@ package com.cybercom.rasinski.pointofsale.output;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
+import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 import com.cybercom.rasinski.pointofsale.infrastructure.Printer;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
@@ -41,9 +42,9 @@ public class PrinterTest {
     public void shouldPrint() {
         //given
         Printer printer = new Printer();
-        Money totalSum = new Money(new BigDecimal(5));
+        ShoppingCart shoppingCart = new ShoppingCart(products);
         //when
-        printer.print(products, totalSum);
+        printer.print(shoppingCart);
         //then
         String expectedString = getExpectedString();
         assertThat(systemOutStream.toString()).isEqualTo(expectedString);

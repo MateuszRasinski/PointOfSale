@@ -3,15 +3,17 @@ package com.cybercom.rasinski.pointofsale.infrastructure;
 import com.cybercom.rasinski.pointofsale.application.OutputPOS;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
+import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 import java.util.List;
 
 public class Printer implements OutputPOS {
     private static String LINE_SEPARATOR = System.lineSeparator();
 
-    public void print(List<Product> products, Money totalSum) {
+    @Override
+    public void print(ShoppingCart shoppingCart) {
         StringBuilder sb = new StringBuilder(100);
 
-        buildContent(products, totalSum, sb);
+        buildContent(shoppingCart.getProducts(), shoppingCart.getTotalSum(), sb);
 
         System.out.print(sb);
     }

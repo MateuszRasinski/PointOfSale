@@ -3,9 +3,15 @@ package com.cybercom.rasinski.pointofsale.infrastructure;
 import com.cybercom.rasinski.pointofsale.application.OutputPOS;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
+import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 
 public class LcdDisplay implements OutputPOS {
     public LcdDisplay() {
+    }
+
+    @Override
+    public void print(ShoppingCart shoppingCart) {
+        print(shoppingCart.getTotalSum());
     }
 
     public void print(Product product) {
@@ -16,7 +22,7 @@ public class LcdDisplay implements OutputPOS {
         System.out.print(sb);
     }
 
-    public void print(Money totalSum) {
+    private void print(Money totalSum) {
         System.out.print("TOTAL:\t\t" + totalSum);
     }
 
