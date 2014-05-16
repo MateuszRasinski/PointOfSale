@@ -54,16 +54,10 @@ public class PrinterTest {
 
     private String getExpectedString() {
         String lineSeparator = System.lineSeparator();
-        StringBuilder sb = new StringBuilder();
-        sb.append("Name\t\tPrice")
-                .append(lineSeparator)
-                .append("Sample product\t\t3.5")
-                .append(lineSeparator)
-                .append("Soap\t\t1.5")
-                .append(lineSeparator)
-                .append("TOTAL:\t\t5")
-                .append(lineSeparator);
-        return sb.toString();
+        return "Name\t\tPrice" + lineSeparator
+                + "Sample product\t\t3.5" + lineSeparator
+                + "Soap\t\t1.5" + lineSeparator
+                + "TOTAL:\t\t5" + lineSeparator;
     }
 
 

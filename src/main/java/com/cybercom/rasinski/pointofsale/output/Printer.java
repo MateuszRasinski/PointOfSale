@@ -24,6 +24,6 @@ public class Printer implements OutputPOS {
                 .append(totalSum)
                 .append(LINE_SEPARATOR);
 
-        System.out.print(sb.toString());
+        System.out.print(sb);
     }
 }
