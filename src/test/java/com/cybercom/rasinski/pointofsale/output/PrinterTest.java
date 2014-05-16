@@ -16,6 +16,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import static org.fest.assertions.api.Assertions.assertThat;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 public class PrinterTest {
     private static final Locale LOCALE_PL = new Locale("pl", "PL");
@@ -28,8 +30,8 @@ public class PrinterTest {
     public void setUp() {
         Product[] productsArray = {
                 new Product(1L, "Sample product", new Barcode("123"),
-                        new Money(new BigDecimal(3.5))),
-                new Product(2L, "Soap", new Barcode("123"), new Money(new BigDecimal(1.5)))
+                        new Money(new BigDecimal("3.5"))),
+                new Product(2L, "Soap", new Barcode("123"), new Money(new BigDecimal("1.5")))
         };
         products = Arrays.asList(productsArray);
 
@@ -42,9 +44,11 @@ public class PrinterTest {
     public void shouldPrint() {
         //given
         Printer printer = new Printer();
-        ShoppingCart shoppingCart = new ShoppingCart(products);
+        ShoppingCart shoppingCartMock = mock(ShoppingCart.class);
+        when(shoppingCartMock.getProducts()).thenReturn(products);
+        when(shoppingCartMock.getTotalSum()).thenReturn(new Money(new BigDecimal("5")));
         //when
-        printer.print(shoppingCart);
+        printer.print(shoppingCartMock);
         //then
         String expectedString = getExpectedString();
         assertThat(systemOutStream.toString()).isEqualTo(expectedString);

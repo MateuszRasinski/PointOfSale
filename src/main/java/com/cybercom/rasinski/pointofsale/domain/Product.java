@@ -1,7 +1,5 @@
 package com.cybercom.rasinski.pointofsale.domain;
 
-import java.math.BigDecimal;
-
 public class Product {
     private Long id;
     private String name;
