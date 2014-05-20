@@ -1,10 +1,11 @@
 package com.cybercom.rasinski.pointofsale.domain;
 
-import com.cybercom.rasinski.pointofsale.Settings;
+import com.cybercom.rasinski.pointofsale.System.Settings;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.Currency;
 import java.util.Locale;
 
 public class Money {
@@ -46,7 +47,7 @@ public class Money {
     }
 
     private boolean isTheSameCurrency(Money other) {
-        return currency.equals(other.currency);
+        return Currency.getInstance(currency).equals(Currency.getInstance(other.currency));
     }
 
     @Override
