@@ -1,12 +1,12 @@
 package com.cybercom.rasinski.pointofsale.infrastructure;
 
-import com.cybercom.rasinski.pointofsale.application.Output;
+import com.cybercom.rasinski.pointofsale.application.output.SummaryOutput;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 import java.util.List;
 
-public class Printer implements Output {
+public class Printer implements SummaryOutput {
 
     public static final String HEADER = "Name" + TABBED_SPACE + "Price" + LINE_SEPARATOR;
 
@@ -43,20 +43,5 @@ public class Printer implements Output {
                 .append(TABBED_SPACE)
                 .append(totalSum)
                 .append(LINE_SEPARATOR);
-    }
-
-    @Override
-    public void print(Product product) {
-        //Not applicable to the Printer.
-    }
-
-    @Override
-    public void printProductNotFound() {
-        //Not applicable to the Printer.
-    }
-
-    @Override
-    public void printInvalidBarcode() {
-        //Not applicable to the Printer.
     }
 }

@@ -1,5 +1,7 @@
 package com.cybercom.rasinski.pointofsale.application;
 
+import com.cybercom.rasinski.pointofsale.application.output.SingleProductOutput;
+import com.cybercom.rasinski.pointofsale.application.output.SummaryOutput;
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.ProductRepository;
 import com.cybercom.rasinski.pointofsale.infrastructure.LcdDisplay;
@@ -17,9 +19,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static com.cybercom.rasinski.pointofsale.application.Output.LINE_SEPARATOR;
-import static com.cybercom.rasinski.pointofsale.application.Output.TABBED_SPACE;
-import static com.cybercom.rasinski.pointofsale.application.Output.TOTAL;
+import static com.cybercom.rasinski.pointofsale.application.output.SummaryOutput.LINE_SEPARATOR;
+import static com.cybercom.rasinski.pointofsale.application.output.SummaryOutput.TABBED_SPACE;
+import static com.cybercom.rasinski.pointofsale.application.output.SummaryOutput.TOTAL;
 import static org.fest.assertions.api.Assertions.assertThat;
 
 public class SaleServiceTest {
@@ -36,7 +38,7 @@ public class SaleServiceTest {
     public void setUp() {
         setUpSystemOut();
 
-        saleService = new SaleServiceImpl(barcodeScanner, initOutputs());
+        saleService = new SaleServiceImpl(barcodeScanner, initSingleProductOutput(), initSummaryOutputs());
     }
 
     private void setUpSystemOut() {
@@ -58,14 +60,17 @@ public class SaleServiceTest {
         return new BarcodeScanner(productRepository);
     }
 
-    private List<Output> initOutputs() {
-        LcdDisplay lcdDisplay = new LcdDisplay();
-        Printer printer = new Printer();
+    private List<SingleProductOutput> initSingleProductOutput() {
+        List<SingleProductOutput> singleProductOutputs = new ArrayList<>();
+        singleProductOutputs.add(new LcdDisplay());
+        return singleProductOutputs;
+    }
 
-        List<Output> outputs = new ArrayList<>();
-        outputs.add(lcdDisplay);
-        outputs.add(printer);
-        return outputs;
+    private List<SummaryOutput> initSummaryOutputs() {
+        List<SummaryOutput> summaryOutputs = new ArrayList<>();
+        summaryOutputs.add(new LcdDisplay());
+        summaryOutputs.add(new Printer());
+        return summaryOutputs;
     }
 
     @Test

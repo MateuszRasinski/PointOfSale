@@ -16,6 +16,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Locale;
 
+import static com.cybercom.rasinski.pointofsale.application.output.Output.TABBED_SPACE;
+import static com.cybercom.rasinski.pointofsale.application.output.Output.TOTAL;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -45,7 +47,7 @@ public class LcdDisplayTest {
         //when
         lcdDisplay.print(product);
         //then
-        String expected = "Bread\t\t0,33 zł";
+        String expected = "Bread" + TABBED_SPACE + "0,33 zł";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
     }
 
@@ -58,7 +60,7 @@ public class LcdDisplayTest {
         //when
         lcdDisplay.print(product);
         //then
-        String expected = "Bread\t\t$0.33";
+        String expected = "Bread" + TABBED_SPACE + "$0.33";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
     }
 
@@ -72,7 +74,7 @@ public class LcdDisplayTest {
         //when
         lcdDisplay.printSummary(shoppingCart);
         //then
-        String expected = "TOTAL:\t\t54,14 zł";
+        String expected = TOTAL + TABBED_SPACE + "54,14 zł";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
     }
 
@@ -86,7 +88,7 @@ public class LcdDisplayTest {
         //when
         lcdDisplay.printSummary(shoppingCart);
         //then
-        String expected = "TOTAL:\t\t$54.14";
+        String expected = TOTAL + TABBED_SPACE + "$54.14";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
     }
 

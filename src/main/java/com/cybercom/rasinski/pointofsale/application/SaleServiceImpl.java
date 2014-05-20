@@ -1,6 +1,8 @@
 package com.cybercom.rasinski.pointofsale.application;
 
 import com.cybercom.rasinski.pointofsale.System.Settings;
+import com.cybercom.rasinski.pointofsale.application.output.SingleProductOutput;
+import com.cybercom.rasinski.pointofsale.application.output.SummaryOutput;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
@@ -13,16 +15,20 @@ import static com.cybercom.rasinski.pointofsale.System.validation.Validator.chec
 public class SaleServiceImpl implements SaleService {
     public static final String EXIT = "exit";
     private BarcodeScanner barcodeScanner;
-    private List<Output> outputs;
+    private List<SingleProductOutput> singleProductOutputs;
+    private List<SummaryOutput> summaryOutputs;
     private ShoppingCart shoppingCart;
 
-    public SaleServiceImpl(BarcodeScanner barcodeScanner, List<Output> outputs) {
-        this(barcodeScanner, outputs, new ShoppingCart(Settings.DEFAULT_LOCALE));
+    public SaleServiceImpl(BarcodeScanner barcodeScanner, List<SingleProductOutput> singleProductOutputs,
+                           List<SummaryOutput> summaryOutputs) {
+        this(barcodeScanner, singleProductOutputs, summaryOutputs, new ShoppingCart(Settings.DEFAULT_LOCALE));
     }
 
-    public SaleServiceImpl(BarcodeScanner barcodeScanner, List<Output> outputs, ShoppingCart cart) {
+    public SaleServiceImpl(BarcodeScanner barcodeScanner, List<SingleProductOutput> singleProductOutputs,
+                           List<SummaryOutput> summaryOutputs, ShoppingCart cart) {
         this.barcodeScanner = barcodeScanner;
-        this.outputs = outputs;
+        this.singleProductOutputs = singleProductOutputs;
+        this.summaryOutputs = summaryOutputs;
         this.shoppingCart = cart;
     }
 
@@ -58,26 +64,26 @@ public class SaleServiceImpl implements SaleService {
     }
 
     private void printSummary() {
-        for (Output output : outputs) {
-            output.printSummary(shoppingCart);
+        for (SummaryOutput summaryOutput : summaryOutputs) {
+            summaryOutput.printSummary(shoppingCart);
         }
     }
 
     private void printInvalidBarcode() {
-        for (Output output : outputs) {
-            output.printInvalidBarcode();
+        for (SingleProductOutput singleProductOutput : singleProductOutputs) {
+            singleProductOutput.printInvalidBarcode();
         }
     }
 
     private void printProductNotFound() {
-        for (Output output : outputs) {
-            output.printProductNotFound();
+        for (SingleProductOutput singleProductOutput : singleProductOutputs) {
+            singleProductOutput.printProductNotFound();
         }
     }
 
     private void print(Product product) {
-        for (Output output : outputs) {
-            output.print(product);
+        for (SingleProductOutput singleProductOutput : singleProductOutputs) {
+            singleProductOutput.print(product);
         }
     }
 }

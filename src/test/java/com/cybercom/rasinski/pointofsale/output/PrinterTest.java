@@ -14,8 +14,9 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.cybercom.rasinski.pointofsale.application.Output.LINE_SEPARATOR;
-import static com.cybercom.rasinski.pointofsale.application.Output.TOTAL;
+import static com.cybercom.rasinski.pointofsale.application.output.Output.TABBED_SPACE;
+import static com.cybercom.rasinski.pointofsale.application.output.SummaryOutput.LINE_SEPARATOR;
+import static com.cybercom.rasinski.pointofsale.application.output.SummaryOutput.TOTAL;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -59,8 +60,8 @@ public class PrinterTest {
 
     private String getExpectedString() {
         return Printer.HEADER
-                + "Sample product\t\t3,50 zł" + LINE_SEPARATOR
-                + "Soap\t\t1,50 zł" + LINE_SEPARATOR
-                + TOTAL + "\t\t5,00 zł" + LINE_SEPARATOR;
+                + "Sample product" + TABBED_SPACE + "3,50 zł" + LINE_SEPARATOR
+                + "Soap" + TABBED_SPACE + "1,50 zł" + LINE_SEPARATOR
+                + TOTAL + TABBED_SPACE + "5,00 zł" + LINE_SEPARATOR;
     }
 }
