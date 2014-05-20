@@ -14,6 +14,8 @@ import java.io.PrintStream;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.cybercom.rasinski.pointofsale.application.Output.LINE_SEPARATOR;
+import static com.cybercom.rasinski.pointofsale.application.Output.TOTAL;
 import static org.fest.assertions.api.Assertions.assertThat;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -22,7 +24,6 @@ public class PrinterTest {
     private List<Product> products;
     private ByteArrayOutputStream systemOutStream;
     private PrintStream originalSystemOut;
-
 
     @BeforeMethod
     public void setUp() {
@@ -37,32 +38,29 @@ public class PrinterTest {
         System.setOut(new PrintStream(systemOutStream));
     }
 
+    @AfterMethod
+    public void tearDown() {
+        System.setOut(originalSystemOut);
+    }
+
     @Test
-    public void shouldPrint() {
+    public void shouldPrintSummary() {
         //given
         Printer printer = new Printer();
         ShoppingCart shoppingCartMock = mock(ShoppingCart.class);
         when(shoppingCartMock.getProducts()).thenReturn(products);
         when(shoppingCartMock.getTotalSum()).thenReturn(new Money("5"));
         //when
-        printer.print(shoppingCartMock);
+        printer.printSummary(shoppingCartMock);
         //then
         String expectedString = getExpectedString();
         assertThat(systemOutStream.toString()).isEqualTo(expectedString);
     }
 
-
     private String getExpectedString() {
-        String lineSeparator = System.lineSeparator();
-        return "Name\t\tPrice" + lineSeparator
-                + "Sample product\t\t3,50 zł" + lineSeparator
-                + "Soap\t\t1,50 zł" + lineSeparator
-                + "TOTAL:\t\t5,00 zł" + lineSeparator;
-    }
-
-
-    @AfterMethod
-    public void tearDown() {
-        System.setOut(originalSystemOut);
+        return Printer.HEADER
+                + "Sample product\t\t3,50 zł" + LINE_SEPARATOR
+                + "Soap\t\t1,50 zł" + LINE_SEPARATOR
+                + TOTAL + "\t\t5,00 zł" + LINE_SEPARATOR;
     }
 }

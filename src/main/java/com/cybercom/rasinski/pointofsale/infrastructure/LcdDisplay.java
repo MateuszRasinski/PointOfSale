@@ -7,7 +7,7 @@ import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 
 public class LcdDisplay implements Output {
     @Override
-    public void print(ShoppingCart shoppingCart) {
+    public void printSummary(ShoppingCart shoppingCart) {
         print(shoppingCart.getTotalSum());
     }
 
@@ -16,7 +16,7 @@ public class LcdDisplay implements Output {
     }
 
     private void print(Money totalSum) {
-        System.out.print("TOTAL:" + TABBED_SPACE + totalSum);
+        System.out.print(TOTAL + TABBED_SPACE + totalSum);
     }
 
     public void printProductNotFound() {

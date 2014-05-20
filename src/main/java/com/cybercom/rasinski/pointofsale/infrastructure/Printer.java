@@ -7,8 +7,11 @@ import com.cybercom.rasinski.pointofsale.domain.ShoppingCart;
 import java.util.List;
 
 public class Printer implements Output {
+
+    public static final String HEADER = "Name" + TABBED_SPACE + "Price" + LINE_SEPARATOR;
+
     @Override
-    public void print(ShoppingCart shoppingCart) {
+    public void printSummary(ShoppingCart shoppingCart) {
         StringBuilder sb = new StringBuilder(100);
 
         buildContent(shoppingCart.getProducts(), shoppingCart.getTotalSum(), sb);
@@ -23,10 +26,7 @@ public class Printer implements Output {
     }
 
     private void buildHeader(StringBuilder sb) {
-        sb.append("Name")
-                .append(TABBED_SPACE)
-                .append("Price")
-                .append(LINE_SEPARATOR);
+        sb.append(HEADER);
     }
 
     private void buildBody(StringBuilder sb, List<Product> products) {
@@ -39,9 +39,24 @@ public class Printer implements Output {
     }
 
     private void buildFooter(StringBuilder sb, Money totalSum) {
-        sb.append("TOTAL:")
+        sb.append(TOTAL)
                 .append(TABBED_SPACE)
                 .append(totalSum)
                 .append(LINE_SEPARATOR);
+    }
+
+    @Override
+    public void print(Product product) {
+        //Not applicable to the Printer.
+    }
+
+    @Override
+    public void printProductNotFound() {
+        //Not applicable to the Printer.
+    }
+
+    @Override
+    public void printInvalidBarcode() {
+        //Not applicable to the Printer.
     }
 }

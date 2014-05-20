@@ -1,6 +1,6 @@
 package com.cybercom.rasinski.pointofsale.output;
 
-import com.cybercom.rasinski.pointofsale.Settings;
+import com.cybercom.rasinski.pointofsale.System.Settings;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
@@ -70,7 +70,7 @@ public class LcdDisplayTest {
         ShoppingCart shoppingCart = mock(ShoppingCart.class);
         when(shoppingCart.getTotalSum()).thenReturn(totalSum);
         //when
-        lcdDisplay.print(shoppingCart);
+        lcdDisplay.printSummary(shoppingCart);
         //then
         String expected = "TOTAL:\t\t54,14 zł";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
@@ -84,7 +84,7 @@ public class LcdDisplayTest {
         ShoppingCart shoppingCart = mock(ShoppingCart.class);
         when(shoppingCart.getTotalSum()).thenReturn(totalSum);
         //when
-        lcdDisplay.print(shoppingCart);
+        lcdDisplay.printSummary(shoppingCart);
         //then
         String expected = "TOTAL:\t\t$54.14";
         assertThat(systemOutStream.toString()).isEqualTo(expected);
