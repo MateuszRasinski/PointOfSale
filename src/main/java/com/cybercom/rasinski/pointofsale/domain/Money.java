@@ -1,6 +1,6 @@
 package com.cybercom.rasinski.pointofsale.domain;
 
-import com.cybercom.rasinski.pointofsale.System.Settings;
+import com.cybercom.rasinski.pointofsale.system.Settings;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.DecimalFormat;

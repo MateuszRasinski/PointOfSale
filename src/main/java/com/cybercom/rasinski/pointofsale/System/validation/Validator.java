@@ -1,4 +1,4 @@
-package com.cybercom.rasinski.pointofsale.System.validation;
+package com.cybercom.rasinski.pointofsale.system.validation;
 
 public final class Validator {
     private Validator() {}

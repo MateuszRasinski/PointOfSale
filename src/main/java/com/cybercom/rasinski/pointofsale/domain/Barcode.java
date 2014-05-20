@@ -1,6 +1,6 @@
 package com.cybercom.rasinski.pointofsale.domain;
 
-import static com.cybercom.rasinski.pointofsale.System.validation.Validator.checkNotNull;
+import static com.cybercom.rasinski.pointofsale.system.validation.Validator.checkNotNull;
 
 public class Barcode {
     private String code;

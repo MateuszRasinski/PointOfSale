@@ -1,6 +1,6 @@
 package com.cybercom.rasinski.pointofsale.application;
 
-import com.cybercom.rasinski.pointofsale.System.Settings;
+import com.cybercom.rasinski.pointofsale.system.Settings;
 import com.cybercom.rasinski.pointofsale.application.output.SingleProductOutput;
 import com.cybercom.rasinski.pointofsale.application.output.SummaryOutput;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
@@ -10,7 +10,7 @@ import com.cybercom.rasinski.pointofsale.infrastructure.ProductNotFoundException
 
 import java.util.List;
 
-import static com.cybercom.rasinski.pointofsale.System.validation.Validator.checkNotNull;
+import static com.cybercom.rasinski.pointofsale.system.validation.Validator.checkNotNull;
 
 public class SaleServiceImpl implements SaleService {
     public static final String EXIT = "exit";

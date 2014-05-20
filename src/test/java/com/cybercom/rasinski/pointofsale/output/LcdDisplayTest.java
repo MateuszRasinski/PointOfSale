@@ -1,6 +1,6 @@
 package com.cybercom.rasinski.pointofsale.output;
 
-import com.cybercom.rasinski.pointofsale.System.Settings;
+import com.cybercom.rasinski.pointofsale.system.Settings;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;

@@ -4,8 +4,8 @@ import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Product;
 import com.cybercom.rasinski.pointofsale.domain.ProductRepository;
 
-import static com.cybercom.rasinski.pointofsale.System.validation.Validator.checkNotEmpty;
-import static com.cybercom.rasinski.pointofsale.System.validation.Validator.checkNotNull;
+import static com.cybercom.rasinski.pointofsale.system.validation.Validator.checkNotEmpty;
+import static com.cybercom.rasinski.pointofsale.system.validation.Validator.checkNotNull;
 
 public class BarcodeScanner {
     private ProductRepository productRepository;
