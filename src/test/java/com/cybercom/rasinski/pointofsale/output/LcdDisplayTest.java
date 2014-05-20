@@ -1,5 +1,6 @@
 package com.cybercom.rasinski.pointofsale.output;
 
+import com.cybercom.rasinski.pointofsale.Settings;
 import com.cybercom.rasinski.pointofsale.domain.Barcode;
 import com.cybercom.rasinski.pointofsale.domain.Money;
 import com.cybercom.rasinski.pointofsale.domain.Product;
@@ -20,7 +21,6 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 public class LcdDisplayTest {
-    private static final Locale LOCALE_PL = new Locale("pl", "PL");
     private PrintStream originalSystemOut;
     private ByteArrayOutputStream systemOutStream;
 
@@ -41,7 +41,7 @@ public class LcdDisplayTest {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay();
         BigDecimal price = new BigDecimal("0.33").setScale(2, RoundingMode.HALF_UP);
-        Product product = new Product(1L, "Bread", new Barcode("123"), new Money(price, LOCALE_PL));
+        Product product = new Product(1L, "Bread", new Barcode("123"), new Money(price, Settings.DEFAULT_LOCALE));
         //when
         lcdDisplay.print(product);
         //then
@@ -66,7 +66,7 @@ public class LcdDisplayTest {
     public void shouldPrintTotalSumInPLN() {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay();
-        Money totalSum = new Money(new BigDecimal("54.135"), LOCALE_PL);
+        Money totalSum = new Money("54.135");
         ShoppingCart shoppingCart = mock(ShoppingCart.class);
         when(shoppingCart.getTotalSum()).thenReturn(totalSum);
         //when
@@ -80,7 +80,7 @@ public class LcdDisplayTest {
     public void shouldPrintTotalSumInUSD() {
         //given
         LcdDisplay lcdDisplay = new LcdDisplay();
-        Money totalSum = new Money(new BigDecimal("54.135"), Locale.US);
+        Money totalSum = new Money("54.135", Locale.US);
         ShoppingCart shoppingCart = mock(ShoppingCart.class);
         when(shoppingCart.getTotalSum()).thenReturn(totalSum);
         //when

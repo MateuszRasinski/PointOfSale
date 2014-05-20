@@ -2,11 +2,11 @@ package com.cybercom.rasinski.pointofsale.domain;
 
 import com.cybercom.rasinski.pointofsale.infrastructure.ProductNotFoundException;
 import com.cybercom.rasinski.pointofsale.infrastructure.ProductRepositoryImpl;
-import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.Map;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.fest.assertions.api.Assertions.assertThat;
 
@@ -14,12 +14,10 @@ public class ProductRepositoryTest {
     private ProductRepository productRepository;
     private Product sampleProduct;
 
-
     @BeforeClass
     public void setUp() {
         Map<Long, Product> productTable = new HashMap<>();
-        sampleProduct = new Product(1L, "Sample name", new Barcode("xx"),
-                new Money(new BigDecimal("3.5")));
+        sampleProduct = new Product(1L, "Sample name", new Barcode("xx"), new Money("3.5"));
         productTable.put(1L, sampleProduct);
         productRepository = new ProductRepositoryImpl(productTable);
     }
@@ -31,7 +29,6 @@ public class ProductRepositoryTest {
         //then
         assertThat(product).isEqualTo(sampleProduct);
     }
-
 
     @Test(expectedExceptions = ProductNotFoundException.class)
     public void shouldThrowProductNotFoundException() {

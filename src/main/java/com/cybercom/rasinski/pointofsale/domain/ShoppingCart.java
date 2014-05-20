@@ -1,5 +1,7 @@
 package com.cybercom.rasinski.pointofsale.domain;
 
+import com.cybercom.rasinski.pointofsale.Settings;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +12,10 @@ import static com.cybercom.rasinski.pointofsale.validation.Validator.checkNotNul
 public class ShoppingCart {
     private List<Product> products;
     private Money totalSum;
+
+    public ShoppingCart() {
+        this(Settings.DEFAULT_LOCALE);
+    }
 
     public ShoppingCart(Locale currency) {
         this.products = new ArrayList<>();
@@ -24,7 +30,7 @@ public class ShoppingCart {
         return totalSum;
     }
 
-    public void addToCart(Product product) {
+    public void add(Product product) {
         checkNotNull(product);
 
         products.add(product);

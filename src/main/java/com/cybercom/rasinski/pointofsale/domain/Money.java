@@ -12,8 +12,16 @@ public class Money {
     private BigDecimal amount;
     private Locale currency;
 
+    public Money(String amount) {
+        this(new BigDecimal(amount));
+    }
+
     public Money(BigDecimal amount) {
         this(amount, Settings.DEFAULT_LOCALE);
+    }
+
+    public Money(String amount, Locale currency) {
+        this(new BigDecimal(amount), currency);
     }
 
     public Money(BigDecimal amount, Locale currency) {
@@ -44,5 +52,27 @@ public class Money {
     @Override
     public String toString() {
         return decimalFormat.format(amount);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Money)) return false;
+
+        Money money = (Money) o;
+
+        if (!amount.equals(money.amount)) return false;
+        if (!currency.equals(money.currency)) return false;
+        if (!decimalFormat.equals(money.decimalFormat)) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = decimalFormat.hashCode();
+        result = 31 * result + amount.hashCode();
+        result = 31 * result + currency.hashCode();
+        return result;
     }
 }

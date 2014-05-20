@@ -24,7 +24,6 @@ public class ProductRepositoryImpl implements ProductRepository {
         return foundProduct;
     }
 
-
     private Product findProductByBarcodeFromProductTable(Barcode barcode) {
         Product foundProduct = null;
         for(Product product : productTable.values()) {
