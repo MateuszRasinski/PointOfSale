@@ -1,13 +1,13 @@
 package com.cybercom.rasinski.pointofsale.domain;
 
-import com.cybercom.rasinski.pointofsale.Settings;
+import com.cybercom.rasinski.pointofsale.System.Settings;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import static com.cybercom.rasinski.pointofsale.validation.Validator.checkNotNull;
+import static com.cybercom.rasinski.pointofsale.System.validation.Validator.checkNotNull;
 
 public class ShoppingCart {
     private List<Product> products;

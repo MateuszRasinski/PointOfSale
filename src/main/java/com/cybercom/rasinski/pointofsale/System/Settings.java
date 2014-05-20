@@ -1,4 +1,4 @@
-package com.cybercom.rasinski.pointofsale;
+package com.cybercom.rasinski.pointofsale.System;
 
 import java.util.Locale;
 
