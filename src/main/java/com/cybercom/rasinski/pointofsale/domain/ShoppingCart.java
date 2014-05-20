@@ -11,7 +11,7 @@ import static com.cybercom.rasinski.pointofsale.System.validation.Validator.chec
 
 public class ShoppingCart {
     private List<Product> products;
-    private Money totalSum;
+    private Locale currency;
 
     public ShoppingCart() {
         this(Settings.DEFAULT_LOCALE);
@@ -19,7 +19,7 @@ public class ShoppingCart {
 
     public ShoppingCart(Locale currency) {
         this.products = new ArrayList<>();
-        this.totalSum = new Money(BigDecimal.ZERO, currency);
+        this.currency = currency;
     }
 
     public List<Product> getProducts() {
@@ -27,6 +27,10 @@ public class ShoppingCart {
     }
 
     public Money getTotalSum() {
+        Money totalSum = new Money(BigDecimal.ZERO, currency);
+        for (Product product : products) {
+            totalSum = totalSum.add(product.getPrice());
+        }
         return totalSum;
     }
 
@@ -34,6 +38,5 @@ public class ShoppingCart {
         checkNotNull(product);
 
         products.add(product);
-        totalSum = totalSum.add(product.getPrice());
     }
 }
